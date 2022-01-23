@@ -1,8 +1,8 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import './index.css';
-import 'bootstrap/dist/css/bootstrap.min.css';
-import App from './App';
+import App from './app/layout/App';
+import NavBar from './app/layout/NavBar';
+import './assets/tailwind.css';
 
 import reportWebVitals from './reportWebVitals';
 
