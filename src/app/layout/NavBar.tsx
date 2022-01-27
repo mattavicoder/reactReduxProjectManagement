@@ -9,12 +9,12 @@ const NavBar = () => {
 
   return (
     <>
-      <nav className="">
+      <nav className="bg-gradient-to-r from-blue-400 to-cyan-500">
         <div className="flex sm:justify-between items-start py-3 mx-auto flex-wrap">
-          <a href="#" className="flex items-baseline">
+          <a href="#" className="flex items-baseline mx-2">
             <VscAzure />
             <label htmlFor="" className="font-bold mx-4">
-              Azure
+              Activities
             </label>
           </a>
 
