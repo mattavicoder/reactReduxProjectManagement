@@ -7,3 +7,9 @@ export interface IProjectList {
 export interface IProjectDetail {
   project: Project;
 }
+
+export interface IProjectState {
+  projectList: Project[];
+  selectedProject: Project;
+  status: "idle" | "loading" | "failed";
+}

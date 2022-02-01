@@ -1,6 +1,6 @@
 import React, { ChangeEvent, useState } from "react";
-import ActivityApi from "../../api/ActivityApi";
-import { IActivity } from "../../interfaces/IActivityList";
+import ActivityApi from "../../../api/ActivityApi";
+import { IActivity } from "../../../interfaces/IActivityList";
 
 const ActivityEdit: React.FC<IActivity> = ({ activity }) => {
   const [getActivity, setActivity] = useState(activity);

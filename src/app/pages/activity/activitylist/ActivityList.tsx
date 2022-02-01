@@ -1,5 +1,5 @@
 import React from "react";
-import { IActivityList } from "../../interfaces/IActivityList";
+import { IActivityList } from "../../../interfaces/IActivityList";
 import ActivityDetail from "../activitydetail/ActivityDetail";
 import ActivityEdit from "../activityEdit/ActivityEdit";
 

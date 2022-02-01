@@ -1,5 +1,5 @@
 import React from "react";
-import { IActivity } from "../../interfaces/IActivityList";
+import { IActivity } from "../../../interfaces/IActivityList";
 
 const ActivityDetail: React.FC<IActivity> = ({ activity }: IActivity) => {
   return (
