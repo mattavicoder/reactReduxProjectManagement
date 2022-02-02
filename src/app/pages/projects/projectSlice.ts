@@ -42,4 +42,7 @@ export const projectSlice = createSlice({
 export const selectProjectList = (state: RootState) =>
   state.project.projectList;
 
+export const selectProjectById = (state: RootState, projectId: number) =>
+  state.project.projectList.find((p) => p.id == projectId);
+
 export default projectSlice.reducer;
