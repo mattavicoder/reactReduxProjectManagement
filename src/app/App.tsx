@@ -9,13 +9,6 @@ import ProjectList from "./pages/projects/projectList/ProjectList";
 function App() {
   const [activites, setActivites] = useState<Activity[]>([]);
 
-  // useEffect(() => {
-  //   ActivityApi.list().then((response) => {
-  //     console.log(response);
-  //     setActivites(response);
-  //   });
-  // }, []);
-
   return (
     <>
       <div className="">

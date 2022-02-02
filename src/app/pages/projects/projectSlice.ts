@@ -1,4 +1,8 @@
-import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
+import {
+  createAsyncThunk,
+  createEntityAdapter,
+  createSlice,
+} from "@reduxjs/toolkit";
 import ProjectApi from "../../api/ProjectApi";
 import { IProjectState } from "../../interfaces/IProject";
 import { Project } from "../../models/Project";
@@ -9,11 +13,15 @@ export interface ProjectState {
   status: "idle" | "loading" | "failed";
 }
 
-const initialState: IProjectState = {
+const projectsAdapter = createEntityAdapter({
+  sortComparer: (a: Project, b: Project) =>
+    b.id.toString().localeCompare(a.id.toString()),
+});
+
+const initialState = projectsAdapter.getInitialState({
   status: "idle",
-  selectedProject: { id: 0, name: "", description: "", status: "" },
-  projectList: [],
-};
+  error: null,
+});
 
 export const getProjectsListAsync = createAsyncThunk(
   "project/fetchAll",
@@ -33,16 +41,16 @@ export const projectSlice = createSlice({
         state.status = "loading";
       })
       .addCase(getProjectsListAsync.fulfilled, (state, action) => {
-        state.status = "idle";
-        state.projectList = [...action.payload];
+        projectsAdapter.upsertMany(state, action.payload);
       });
   },
 });
 
-export const selectProjectList = (state: RootState) =>
-  state.project.projectList;
-
-export const selectProjectById = (state: RootState, projectId: number) =>
-  state.project.projectList.find((p) => p.id == projectId);
+export const {
+  selectAll: selectAllProjects,
+  selectById: selectProjectById,
+  selectIds: selectProjectIds,
+  // Pass in a selector that returns the projects slice of state
+} = projectsAdapter.getSelectors((state: RootState) => state.project);
 
 export default projectSlice.reducer;

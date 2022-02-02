@@ -1,8 +1,7 @@
 import React, { useEffect } from "react";
 import { Project } from "../../../models/Project";
 import { useAppDispatch, useAppSelector } from "../../../store/hook";
-import ProjectEdit from "../projectEdit/ProjectEdit";
-import { getProjectsListAsync, selectProjectList } from "../projectSlice";
+import { getProjectsListAsync, selectAllProjects } from "../projectSlice";
 
 const ProjectList: React.FC = () => {
   const dispatch = useAppDispatch();
@@ -11,13 +10,12 @@ const ProjectList: React.FC = () => {
     dispatch(getProjectsListAsync());
   }, []);
 
-  const projectList: Project[] = useAppSelector(selectProjectList);
+  const projectList: Project[] = useAppSelector(selectAllProjects);
 
   return (
     <>
       <div className="flex">
         <div className="w-4/6 sm:w-3/6 divide-y divide-solid">
-          {console.log(projectList)}
           {projectList &&
             projectList.map((p) => (
               <div key={p.id} className="m-3 p-3">
@@ -48,8 +46,6 @@ const ProjectList: React.FC = () => {
             ))}
         </div>
       </div>
-
-      <ProjectEdit></ProjectEdit>
     </>
   );
 };
