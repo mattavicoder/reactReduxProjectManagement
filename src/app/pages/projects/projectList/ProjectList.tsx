@@ -1,4 +1,5 @@
 import React, { useEffect } from "react";
+import { toast } from "react-toastify";
 import { Project } from "../../../models/Project";
 import { useAppDispatch, useAppSelector } from "../../../store/hook";
 import {
@@ -18,7 +19,7 @@ const ProjectList: React.FC = () => {
 
   function handleDelete(id: number) {
     dispatch(deleteProject(id)).finally(() => {
-      alert("deleted");
+      toast.success("Deleted Successfully");
     });
   }
 
@@ -37,9 +38,9 @@ const ProjectList: React.FC = () => {
                   </span>
                 </div>
 
-                <div className="flex justify-between">
-                  <p className="mt-3">{p.description}</p>
-                  <p>
+                <div className="grid grid-cols-2">
+                  <p className="mt-1">{p.description}</p>
+                  <p className="text-right">
                     <button
                       type="button"
                       className="h-8 w-20  text-xs font-medium text-center text-white bg-blue-700 rounded-lg hover:bg-blue-800 dark:bg-blue-600 dark:hover:bg-blue-700"

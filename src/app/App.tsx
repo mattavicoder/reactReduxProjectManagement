@@ -6,6 +6,7 @@ import NavBar from "./layout/NavBar";
 import ActivitiesDashboard from "./pages/activity/dashboard/ActivitiesDashboard";
 import ProjectList from "./pages/projects/projectList/ProjectList";
 import ProjectEdit from "./pages/projects/projectEdit/ProjectEdit";
+import { ToastContainer } from "react-toastify";
 
 function App() {
   const [activites, setActivites] = useState<Activity[]>([]);
@@ -20,6 +21,8 @@ function App() {
           <ProjectEdit />
         </div>
       </div>
+
+      <ToastContainer autoClose={2000} />
     </>
   );
 }

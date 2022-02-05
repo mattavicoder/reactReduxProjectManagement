@@ -1,4 +1,5 @@
 import React, { ChangeEvent, useState } from "react";
+import { toast } from "react-toastify";
 import { IProjectDetail } from "../../../interfaces/IProject";
 import { Project } from "../../../models/Project";
 import { useAppDispatch, useAppSelector } from "../../../store/hook";
@@ -24,7 +25,9 @@ const ProjectEdit: React.FC = () => {
   }
 
   function handleSubmit() {
-    dispatch(saveProject(project)).finally(() => alert("done"));
+    dispatch(saveProject(project)).finally(() =>
+      toast.success("Saved Successfully")
+    );
   }
 
   return (
