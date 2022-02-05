@@ -5,6 +5,7 @@ import ActivityApi from "./api/ActivityApi";
 import NavBar from "./layout/NavBar";
 import ActivitiesDashboard from "./pages/activity/dashboard/ActivitiesDashboard";
 import ProjectList from "./pages/projects/projectList/ProjectList";
+import ProjectEdit from "./pages/projects/projectEdit/ProjectEdit";
 
 function App() {
   const [activites, setActivites] = useState<Activity[]>([]);
@@ -16,6 +17,7 @@ function App() {
         <div className="container">
           {/* <ActivitiesDashboard activities={activites} /> */}
           <ProjectList />
+          <ProjectEdit />
         </div>
       </div>
     </>

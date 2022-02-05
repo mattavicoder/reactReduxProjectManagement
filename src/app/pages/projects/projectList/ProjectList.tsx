@@ -1,7 +1,11 @@
 import React, { useEffect } from "react";
 import { Project } from "../../../models/Project";
 import { useAppDispatch, useAppSelector } from "../../../store/hook";
-import { getProjectsListAsync, selectAllProjects } from "../projectSlice";
+import {
+  deleteProject,
+  getProjectsListAsync,
+  selectAllProjects,
+} from "../projectSlice";
 
 const ProjectList: React.FC = () => {
   const dispatch = useAppDispatch();
@@ -11,6 +15,12 @@ const ProjectList: React.FC = () => {
   }, []);
 
   const projectList: Project[] = useAppSelector(selectAllProjects);
+
+  function handleDelete(id: number) {
+    dispatch(deleteProject(id)).finally(() => {
+      alert("deleted");
+    });
+  }
 
   return (
     <>
@@ -37,7 +47,10 @@ const ProjectList: React.FC = () => {
                       View
                     </button>
 
-                    <button className="h-8 w-20 text-xs font-medium text-center text-white bg-red-700 rounded-lg hover:bg-red-800 dark:bg-red-600 dark:hover:bg-red-700  ml-2">
+                    <button
+                      onClick={handleDelete.bind(this, p.id)}
+                      className="h-8 w-20 text-xs font-medium text-center text-white bg-red-700 rounded-lg hover:bg-red-800 dark:bg-red-600 dark:hover:bg-red-700  ml-2"
+                    >
                       Delete
                     </button>
                   </p>

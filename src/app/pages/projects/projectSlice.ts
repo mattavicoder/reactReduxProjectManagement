@@ -31,6 +31,22 @@ export const getProjectsListAsync = createAsyncThunk(
   }
 );
 
+export const saveProject = createAsyncThunk(
+  "project/save",
+  async (project: Project) => {
+    await ProjectApi.create(project);
+    return project;
+  }
+);
+
+export const deleteProject = createAsyncThunk(
+  "project/delete",
+  async (id: number) => {
+    await ProjectApi.delete(id);
+    return id;
+  }
+);
+
 export const projectSlice = createSlice({
   name: "project",
   initialState,
@@ -42,6 +58,12 @@ export const projectSlice = createSlice({
       })
       .addCase(getProjectsListAsync.fulfilled, (state, action) => {
         projectsAdapter.upsertMany(state, action.payload);
+      })
+      .addCase(saveProject.fulfilled, (state, action) => {
+        projectsAdapter.addOne(state, action.payload);
+      })
+      .addCase(deleteProject.fulfilled, (state, action) => {
+        projectsAdapter.removeOne(state, action.payload);
       });
   },
 });

@@ -1,10 +1,12 @@
 import React, { ChangeEvent, useState } from "react";
 import { IProjectDetail } from "../../../interfaces/IProject";
 import { Project } from "../../../models/Project";
-import { useAppSelector } from "../../../store/hook";
-import { selectProjectById } from "../projectSlice";
+import { useAppDispatch, useAppSelector } from "../../../store/hook";
+import { saveProject, selectProjectById } from "../projectSlice";
 
 const ProjectEdit: React.FC = () => {
+  const dispatch = useAppDispatch();
+
   const defaultProject: Project = {
     id: 0,
     status: "",
@@ -21,7 +23,9 @@ const ProjectEdit: React.FC = () => {
     setProject({ ...project, [name]: value });
   }
 
-  function handleSubmit() {}
+  function handleSubmit() {
+    dispatch(saveProject(project)).finally(() => alert("done"));
+  }
 
   return (
     <div className="w-3/6 m-3 p-3">
@@ -31,6 +35,15 @@ const ProjectEdit: React.FC = () => {
           : project.name}{" "}
       </span>
       <hr className="mt-2" />
+      <p className="mt-2">
+        <button
+          type="button"
+          onClick={handleSubmit}
+          className="h-8 w-20  text-xs font-medium text-center text-white bg-green-700 rounded-lg hover:bg-green-800 dark:bg-green-600 dark:hover:bg-green-700"
+        >
+          Save
+        </button>
+      </p>
       <div className="grid grid-cols-1 gap-3 mt-5">
         <div className="relative z-0 mb-6 w-full group">
           <input
