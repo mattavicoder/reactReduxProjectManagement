@@ -1,23 +1,37 @@
-import React, { ChangeEvent, useState } from "react";
+import React, { ChangeEvent, useEffect, useState } from "react";
+import { useLocation, useNavigate, useParams } from "react-router-dom";
 import { toast } from "react-toastify";
+import ProjectApi from "../../../api/ProjectApi";
 import { IProjectDetail } from "../../../interfaces/IProject";
 import { Project } from "../../../models/Project";
 import { useAppDispatch, useAppSelector } from "../../../store/hook";
-import { saveProject, selectProjectById } from "../projectSlice";
+import {
+  getProjectDetail,
+  saveProject,
+  selectProjectById,
+} from "../projectSlice";
 
 const ProjectEdit: React.FC = () => {
   const dispatch = useAppDispatch();
+  const navigate = useNavigate();
 
-  const defaultProject: Project = {
+  let projectInfo: Project = {
     id: 0,
     status: "",
     description: "",
     name: "",
   };
-  const projectInfo =
-    useAppSelector((state) => selectProjectById(state, 0)) ?? defaultProject;
+  let { id } = useParams<{ id: string }>();
 
   const [project, setProject] = useState<Project>(projectInfo);
+
+  useEffect(() => {
+    if (id) {
+      ProjectApi.details(parseInt(id)).then((data) => setProject(data));
+    } else {
+      setProject(projectInfo);
+    }
+  }, [id]);
 
   function handleDataChange(e: ChangeEvent<HTMLInputElement>) {
     const { name, value } = e.target;
@@ -33,9 +47,9 @@ const ProjectEdit: React.FC = () => {
   return (
     <div className="w-3/6 m-3 p-3">
       <span className="text-2xl ">
-        {project.id == 0 && project.name == ""
+        {(project.id == 0 && project.name == "") || !project.id
           ? "Create New Project"
-          : project.name}{" "}
+          : project.name}
       </span>
       <hr className="mt-2" />
       <p className="mt-2">
@@ -45,6 +59,13 @@ const ProjectEdit: React.FC = () => {
           className="h-8 w-20  text-xs font-medium text-center text-white bg-green-700 rounded-lg hover:bg-green-800 dark:bg-green-600 dark:hover:bg-green-700"
         >
           Save
+        </button>
+        <button
+          type="button"
+          onClick={() => navigate(`/projects/${project.id}`)}
+          className="h-8 w-20  ml-3 text-xs font-medium text-center text-white bg-slate-500 rounded-lg hover:bg-slate-800 dark:bg-slate-600 dark:hover:bg-slate-700"
+        >
+          Back
         </button>
       </p>
       <div className="grid grid-cols-1 gap-3 mt-5">

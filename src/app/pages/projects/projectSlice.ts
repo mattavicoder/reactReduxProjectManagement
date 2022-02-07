@@ -47,6 +47,13 @@ export const deleteProject = createAsyncThunk(
   }
 );
 
+export const getProjectDetail = createAsyncThunk(
+  "project/getById",
+  async (id: number) => {
+    let data = await ProjectApi.details(id);
+  }
+);
+
 export const projectSlice = createSlice({
   name: "project",
   initialState,

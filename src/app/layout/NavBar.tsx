@@ -1,9 +1,16 @@
 import React, { useState } from "react";
 import { VscAzure } from "react-icons/vsc";
 import { HiMenu, HiOutlineX } from "react-icons/hi";
+import { IKeyValue } from "../interfaces/IHelper";
+import { NavLink } from "react-router-dom";
 
 const NavBar = () => {
   let itemArray: string[] = ["Coding", "React", "DevOps", "Azure", "Redis"];
+  let menuArray: IKeyValue[] = [
+    { key: "Projects", value: "/projects" },
+    { key: "Users", value: "/users" },
+    { key: "Create Project", value: "/createProject" },
+  ];
 
   const [menu, setMenu] = useState(false);
 
@@ -21,12 +28,12 @@ const NavBar = () => {
           <div className="hidden w-full sm:block sm:w-auto">
             {
               <ul className="flex flex-col  sm:flex-row">
-                {itemArray.map((s) => (
+                {menuArray.map((s) => (
                   <li
-                    key={s}
+                    key={s.key}
                     className="sm:my-0 my-1 sm:px-3 hover:bg-slate-500 sm:hover:bg-white"
                   >
-                    <a href="#">{s}</a>
+                    <NavLink to={s.value}>{s.key}</NavLink>
                   </li>
                 ))}
               </ul>
@@ -35,12 +42,12 @@ const NavBar = () => {
           {menu && (
             <div className="w-full sm:hidden bg-blue-50">
               <ul className="flex flex-col  sm:flex-row">
-                {itemArray.map((s) => (
+                {menuArray.map((s) => (
                   <li
-                    key={s}
+                    key={s.key}
                     className="sm:my-0 my-1 sm:px-3 hover:bg-slate-500 sm:hover:bg-white"
                   >
-                    <a href="#">{s}</a>
+                    <NavLink to={s.value}>{s.key}</NavLink>
                   </li>
                 ))}
               </ul>

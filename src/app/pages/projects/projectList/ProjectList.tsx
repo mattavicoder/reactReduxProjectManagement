@@ -1,4 +1,5 @@
 import React, { useEffect } from "react";
+import { useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
 import { Project } from "../../../models/Project";
 import { useAppDispatch, useAppSelector } from "../../../store/hook";
@@ -10,9 +11,10 @@ import {
 
 const ProjectList: React.FC = () => {
   const dispatch = useAppDispatch();
+  const navigate = useNavigate();
 
   useEffect(() => {
-    dispatch(getProjectsListAsync());
+    dispatch(getProjectsListAsync()).finally(() => {});
   }, []);
 
   const projectList: Project[] = useAppSelector(selectAllProjects);
@@ -43,6 +45,7 @@ const ProjectList: React.FC = () => {
                   <p className="text-right">
                     <button
                       type="button"
+                      onClick={() => navigate(`/projects/${p.id}`)}
                       className="h-8 w-20  text-xs font-medium text-center text-white bg-blue-700 rounded-lg hover:bg-blue-800 dark:bg-blue-600 dark:hover:bg-blue-700"
                     >
                       View
