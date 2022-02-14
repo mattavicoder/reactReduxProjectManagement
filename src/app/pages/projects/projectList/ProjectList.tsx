@@ -27,37 +27,49 @@ const ProjectList: React.FC = () => {
 
   return (
     <>
-      <div className="flex">
-        <div className="w-4/6 sm:w-3/6 divide-y divide-solid">
+      <div className="flex bg-white">
+        <div className="w-4/6 sm:w-4/6">
           {projectList &&
             projectList.map((p) => (
-              <div key={p.id} className="m-3 p-3">
-                <div className="flex justify-between">
-                  <p className="text-xl">{p.name}</p>
+              <div
+                key={p.id}
+                className="flex gap-2 mx-3 my-7 p-3 border-2 rounded-md"
+              >
+                <img
+                  src="projectimages/books.jpg"
+                  alt=""
+                  className="md:w-1/6 h-24 w-2/6"
+                />
+                <div className="flex flex-col gap-3 px-2 xl:justify-between  md:w-5/6 w-4/6">
+                  <div>
+                    <div className="flex flex-col md:flex-row  justify-between">
+                      <div>
+                        <span className="font-medium">Gaming</span>
+                        <span className="font-light mt-2 md:mt-0 ml-3">
+                          Ubisoft
+                        </span>
+                      </div>
+                      <span className="hidden md:block">20-12-2021</span>
+                    </div>
+                  </div>
+                  <div>
+                    <div className="flex flex-row justify-between">
+                      <p className="hidden md:block md:w-5/6">
+                        {"Lorem ipsum dolor, sit amet consectetur adipisicing elit. Corrupti dolores incidunt fugit consectetur dolorem obcaecati harum nesciunt voluptatibus aliquid, non autem quo minus quibusdam iure labore quas cupiditate ipsa? Ullam!".substring(
+                          0,
+                          100
+                        )}
+                      </p>
+                      <span className="md:hidden self-end">20-12-2021</span>
 
-                  <span className="h-5 bg-gray-100 text-gray-800 text-xs font-semibold mr-2 px-2.5 py-0.5 rounded dark:bg-gray-700 dark:text-gray-300">
-                    {p.status}
-                  </span>
-                </div>
-
-                <div className="grid grid-cols-2">
-                  <p className="mt-1">{p.description}</p>
-                  <p className="text-right">
-                    <button
-                      type="button"
-                      onClick={() => navigate(`/projects/${p.id}`)}
-                      className="h-8 w-20  text-xs font-medium text-center text-white bg-blue-700 rounded-lg hover:bg-blue-800 dark:bg-blue-600 dark:hover:bg-blue-700"
-                    >
-                      View
-                    </button>
-
-                    <button
-                      onClick={handleDelete.bind(this, p.id)}
-                      className="h-8 w-20 text-xs font-medium text-center text-white bg-red-700 rounded-lg hover:bg-red-800 dark:bg-red-600 dark:hover:bg-red-700  ml-2"
-                    >
-                      Delete
-                    </button>
-                  </p>
+                      <button
+                        onClick={() => navigate("/projects/0")}
+                        className="md:w-1/6 mt-2 w-24 h-8 ml-2 self-end text-center rounded-md border-2 hover:bg-amber-50"
+                      >
+                        Detail
+                      </button>
+                    </div>
+                  </div>
                 </div>
               </div>
             ))}

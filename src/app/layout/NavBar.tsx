@@ -31,7 +31,7 @@ const NavBar = () => {
                 {menuArray.map((s) => (
                   <li
                     key={s.key}
-                    className="sm:my-0 my-1 sm:px-3 hover:bg-slate-500 sm:hover:bg-white"
+                    className="sm:my-0 my-1 sm:px-3 text-sm hover:text-base hover:bg-cyan-500"
                   >
                     <NavLink to={s.value}>{s.key}</NavLink>
                   </li>
