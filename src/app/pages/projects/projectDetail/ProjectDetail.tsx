@@ -4,6 +4,7 @@ import { useNavigate, useParams } from "react-router-dom";
 import { useAppSelector } from "../../../store/hook";
 import ProjectEdit from "../projectEdit/ProjectEdit";
 import { selectProjectById } from "../projectSlice";
+import ProjectChat from "./ProjectChat";
 
 type ParamType = {
   id: string;
@@ -43,8 +44,8 @@ const ProjectDetail: React.FC = () => {
           />
           <div className="text-white absolute top-0 left-0 px-3 py-72 flex flex-col gap-3">
             <span className="text-3xl font-bold">
-              Gaming
-              <span className="text-xl font-light ml-3">Ubisoft</span>
+              {project?.name}
+              <span className="text-xl font-light ml-3">{project?.status}</span>
             </span>
 
             <span>20-12-2021</span>
@@ -58,62 +59,7 @@ const ProjectDetail: React.FC = () => {
         </div>
       </div>
 
-      <div className="mt-2">
-        <div className="text-center pt-2 rounded-md bg-teal-600 h-10 font-bold">
-          Chat about this Gaming
-        </div>
-
-        <div className="mt-2">
-          <div className="flex flex-row">
-            <figure className="w-12 h-20 rounded-sm">
-              <img src="/projectimages/emptyperson.png" alt="" />
-            </figure>
-            <div className="ml-2 flex flex-col">
-              <span className="text-base font-bold">
-                UserName
-                <span className="ml-2 font-normal">Today at 2:33PM</span>
-              </span>
-
-              <span>
-                Lorem, ipsum dolor sit amet consectetur adipisicing elit.
-              </span>
-              <a href="#" className="w-20 h-6 text-left mt-1">
-                Reply
-              </a>
-            </div>
-          </div>
-        </div>
-
-        <div className="mt-2">
-          <div className="flex flex-row">
-            <figure className="w-12 h-20 rounded-sm">
-              <img src="/projectimages/emptyperson.png" alt="" />
-            </figure>
-            <div className="ml-2 flex flex-col">
-              <span className="text-base font-bold">
-                UserName
-                <span className="ml-2 font-normal">Today at 2:33PM</span>
-              </span>
-
-              <span>
-                Lorem, ipsum dolor sit amet consectetur adipisicing elit.
-              </span>
-              <a href="#" className="w-20 h-6 text-left mt-1">
-                Reply
-              </a>
-            </div>
-          </div>
-        </div>
-
-        <div className="mt-3">
-          <textarea
-            className="w-full h-auto border-2 border-solid border-slate-300"
-            name=""
-            id=""
-            rows={4}
-          ></textarea>
-        </div>
-      </div>
+      <ProjectChat />
     </div>
   );
 };
