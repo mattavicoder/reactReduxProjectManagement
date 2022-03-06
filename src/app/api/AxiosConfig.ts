@@ -1,4 +1,5 @@
-import axios, { AxiosResponse } from "axios";
+import axios, { Axios, AxiosError, AxiosResponse } from "axios";
+import { toast } from "react-toastify";
 
 const axiosInstance = axios.create({
   baseURL: "http://localhost:5000/api/",
@@ -10,7 +11,24 @@ axiosInstance.interceptors.response.use(
   function (response) {
     return response;
   },
-  function (error) {
+  function (error: AxiosError) {
+    const { data, status } = error.response!;
+
+    switch (status) {
+      case 400:
+        toast.error("Bad Request");
+        break;
+      case 401:
+        toast.error("UnAuthorized");
+        break;
+      case 404:
+        toast.error("Not Found");
+        break;
+      case 500:
+        toast.error("Servre Error");
+        break;
+    }
+
     return Promise.reject(error);
   }
 );
